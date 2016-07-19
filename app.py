@@ -31,7 +31,8 @@ def accounts():
 
 @app.route('/firmid')
 def firm_id():
-    return str(app.config['FIRM_ID'])
+    return str(app.config.keys())
+    # return str(app.config['FIRM_ID'])
 
 
 if __name__ == '__main__':
