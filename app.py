@@ -56,6 +56,8 @@ def addepar():
                         auth=auth,
                         params=params)
 
+    print('headers', dict(data.request.headers))
+    print('url', data.request.url)
     return data.text
 
 if __name__ == '__main__':
