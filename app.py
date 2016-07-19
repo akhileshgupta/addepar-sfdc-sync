@@ -3,11 +3,12 @@ import psycopg2
 import requests
 import urlparse
 from flask import Flask, render_template
+from requests.auth import HTTPBasicAuth
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
-app.config.update(ADDEPAR_KEY=os.environ['ADDEPAR_KEY'],
-                  ADDEPAR_SECRET=os.environ['ADDEPAR_SECRET'])
+app.config.update(dict(ADDEPAR_KEY=os.environ['ADDEPAR_KEY'],
+                       ADDEPAR_SECRET=os.environ['ADDEPAR_SECRET']))
 
 dburl = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(dburl.path[1:], dburl.username,
@@ -43,15 +44,17 @@ def addepar():
     """Query the V1 Portfolio API and return the results"""
     portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'],
                                                                   app.config['ACCOUNTS_VIEW'])
+    auth = HTTPBasicAuth(app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET'])
+    print(auth)
     params = {
         'portfolio_type': 'firm',
-        'portfolio_id': 1,
+        'portfolio_id': app.config['FIRM_ID'],
         'output_type': 'csv',
         'start_date': '2016-06-01',
         'end_date': '2016-06-01'
     }
     data = requests.get(portfolio_url,
-                        auth=(app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET']),
+                        auth=auth,
                         params=params)
 
     return data.text
