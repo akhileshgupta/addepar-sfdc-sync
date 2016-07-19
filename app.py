@@ -46,6 +46,7 @@ def addepar():
     auth = (app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET'])
     print(auth)
     params = {
+        'addepar_firm': app.config['FIRM_ID'],
         'portfolio_type': 'firm',
         'portfolio_id': app.config['FIRM_ID'],
         'output_type': 'csv',
