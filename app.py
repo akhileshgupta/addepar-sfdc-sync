@@ -33,9 +33,9 @@ def accounts():
         return str(e)
 
 
-@app.route('/firmid')
-def firm_id():
-    return str(app.config['FIRM_ID'])
+@app.route('/config')
+def config():
+    return str(app.config)
 
 
 @app.route('/addepar')
