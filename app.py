@@ -41,8 +41,8 @@ def config():
 @app.route('/addepar')
 def addepar():
     """Query the V1 Portfolio API and return the results"""
-    portfolio_url = '{}/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'],
-                                                              app.config['ACCOUNTS_VIEW'])
+    portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'],
+                                                                  app.config['ACCOUNTS_VIEW'])
     params = {
         'portfolio_type': 'firm',
         'portfolio_id': 1,
