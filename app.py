@@ -59,7 +59,8 @@ def addepar():
         view_id = app.config[name + '_VIEW']
         csv = get_csv(view_id)
 
-        insert_obj = {key: csv[col] for key, col in six.iteritems(columns)}
+        insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
+
         for obj in insert_obj:
             obj.update(constants)
 
