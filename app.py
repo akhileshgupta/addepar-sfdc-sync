@@ -3,7 +3,6 @@ import psycopg2
 import requests
 import urlparse
 from flask import Flask, render_template
-from requests.auth import HTTPBasicAuth
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
@@ -36,7 +35,7 @@ def accounts():
 
 @app.route('/config')
 def config():
-    return str(app.config)
+    return str(dict(app.config))
 
 
 @app.route('/addepar')
@@ -44,7 +43,7 @@ def addepar():
     """Query the V1 Portfolio API and return the results"""
     portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'],
                                                                   app.config['ACCOUNTS_VIEW'])
-    auth = HTTPBasicAuth(app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET'])
+    auth = (app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET'])
     print(auth)
     params = {
         'portfolio_type': 'firm',
