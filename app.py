@@ -4,6 +4,7 @@ import urlparse
 from flask import Flask, render_template
 
 app = Flask(__name__)
+app.config.from_object('config')
 url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(url.path[1:], url.username,
                                                     url.password, url.hostname)
@@ -26,6 +27,11 @@ def accounts():
         return render_template('accounts.html', accounts=accounts)
     except Exception as e:
         return str(e)
+
+
+@app.route('/firmid')
+def firm_id():
+    return str(app.config['FIRM_ID'])
 
 
 if __name__ == '__main__':
