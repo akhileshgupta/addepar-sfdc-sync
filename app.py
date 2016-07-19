@@ -36,7 +36,7 @@ def get_csv(view_id):
                         headers={'Addepar-Firm': firm_id},
                         params=params)
 
-    return csv.DictReader(data.text)
+    return csv.DictReader(data.text.splitlines())
 
 
 @app.route('/')
@@ -71,6 +71,7 @@ def mapping():
 def addepar():
     account_csv = get_csv(app.config['ACCOUNTS_VIEW'])
     response = ''
+    print(account_csv.fieldnames)
     for row in account_csv:
         response += '{} {}<br>'.format(row['Client'], row['Client [Entity ID]'])
 
