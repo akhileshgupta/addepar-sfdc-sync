@@ -45,16 +45,17 @@ def addepar():
                                                                   app.config['ACCOUNTS_VIEW'])
     auth = (app.config['ADDEPAR_KEY'], app.config['ADDEPAR_SECRET'])
     print(auth)
+    firm_id = app.config['FIRM_ID']
     params = {
-        'addepar_firm': app.config['FIRM_ID'],
         'portfolio_type': 'firm',
-        'portfolio_id': app.config['FIRM_ID'],
+        'portfolio_id': firm_id,
         'output_type': 'csv',
         'start_date': '2016-06-01',
         'end_date': '2016-06-01'
     }
     data = requests.get(portfolio_url,
                         auth=auth,
+                        headers={'Addepar-Firm': firm_id},
                         params=params)
 
     print('headers', dict(data.request.headers))
