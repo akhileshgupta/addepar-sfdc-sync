@@ -23,7 +23,7 @@ def accounts():
         accounts = cur.fetchall()
         cur.close()
 
-        return render_template('account_template.html', accounts=accounts)
+        return render_template('accounts.html', accounts=accounts)
     except Exception as e:
         return str(e)
 
