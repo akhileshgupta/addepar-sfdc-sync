@@ -2,9 +2,10 @@ import csv
 import os
 import psycopg2
 import requests
+import six
 import urlparse
 
-from flask import Flask, render_template
+from flask import Flask
 from mappings import mappings
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ dburl = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(dburl.path[1:], dburl.username,
                                                     dburl.password, dburl.hostname)
 conn = psycopg2.connect(db)
+cur = conn.cursor()
 auth = (os.environ['ADDEPAR_KEY'], os.environ['ADDEPAR_SECRET'])
 
 
@@ -39,41 +41,29 @@ def get_csv(view_id):
     return csv.DictReader(data.text.splitlines())
 
 
-@app.route('/')
-def hello():
-    return 'Hello World!'
-
-
-@app.route('/accounts')
-def accounts():
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM salesforce.account;")
-        accounts = cur.fetchall()
-        cur.close()
-
-        return render_template('accounts.html', accounts=accounts)
-    except Exception as e:
-        return str(e)
-
-
-@app.route('/config')
-def config():
-    return str(dict(app.config))
-
-
-@app.route('/mappings')
-def mapping():
-    return str(mappings)
+def mark_unique():
+    for table in mappings.keys():
+        unique_col = mappings[table]['unique']
+        cur.execute('ALTER TABLE % ADD UNIQUE (%)', table, unique_col)
 
 
 @app.route('/addepar')
 def addepar():
-    account_csv = get_csv(app.config['ACCOUNTS_VIEW'])
     response = ''
-    print(account_csv.fieldnames)
-    for row in account_csv:
-        response += '{} {}<br>'.format(row['Client'], row['Client [Entity ID]'])
+
+    for table in mappings:
+        config = mappings[table]
+        name = config['name']
+        columns = config['columns']
+        constants = config['constants']
+        view_id = app.config[name + '_VIEW']
+        csv = get_csv(view_id)
+
+        insert_obj = {key: csv[col] for key, col in six.iteritems(columns)}
+        for obj in insert_obj:
+            obj.update(constants)
+
+        response += '{} {}<br>'.format(table, str(insert_obj))
 
     return response
 
