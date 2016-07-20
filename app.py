@@ -50,6 +50,18 @@ def mark_unique():
     cur.close()
 
 
+def gen_sql_string(table, dbcols, unique):
+    percents = ','.join(['%s' for _ in range(len(dbcols))])
+    dbcolstr = ','.join(dbcols)
+
+    return "INSERT INTO {} ({}) VALUES ({}) ON CONFLICT ({}) DO UPDATE SET ({}) = ({})"\
+           .format(table, dbcolstr, percents, unique, dbcolstr, percents)
+
+
+def handle_num(value):
+    return value if value else None
+
+
 @app.route('/addepar')
 def addepar():
     response = ''
@@ -60,22 +72,19 @@ def addepar():
         name = config['name']
         columns = config['columns']
         constants = config['constants']
+        numeric = config['numeric']
         unique = config['unique']
         view_id = app.config[name + '_VIEW']
         csv = get_csv(view_id)
 
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
         dbcols = insert_obj[0].keys() + constants.keys()
-        percents = ','.join(['%s' for _ in range(len(dbcols))])
-        dbcolstr = ','.join(dbcols)
-
-        sql_string = "INSERT INTO {} ({}) VALUES ({}) ON CONFLICT ({}) DO UPDATE SET ({}) = ({})"\
-                     .format(table, dbcolstr, percents, unique, dbcolstr, percents)
+        sql_string = gen_sql_string(table, dbcols, unique)
 
         for obj in insert_obj:
             obj.update(constants)
 
-            sql_data = [obj[col] for col in dbcols]
+            sql_data = [handle_num(obj[col]) if col in numeric else obj[col] for col in dbcols]
             sql_data = sql_data + sql_data
 
             cur.execute(sql_string, sql_data)

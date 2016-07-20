@@ -1,11 +1,12 @@
 """Mappings is an object that goes from table name to mapping object.
 
-Each mapping object has a view name that corresponds to the table, a "columns"
-object which maps columns to entries in the CSV, a "constants" object which
-maps columns to constant values and a "unique" field which marks the column that is
-the unique identifier.
+Each mapping object has a view name that corresponds to the table, a "columns" object which maps
+columns to entries in the CSV, a "constants" object which maps columns to constant values, a
+"numeric" set which contains the fields that need to default to null and a "unique" field which
+marks the column that is the unique identifier.
 
-ALERT: BE VERY CAREFUL WHEN EDITING THIS OBJECT. YOU COULD ACCIDENTALLY CREATE A SQL INJECTION!
+ALERT: BE VERY CAREFUL WHEN EDITING THIS OBJECT. TABLE AND COLUMN NAMES ARE INJECTED INTO SQL
+STATEMENTS DIRECTLY. YOU COULD ACCIDENTALLY CREATE A SQL INJECTION!
 """
 mappings = {
     'salesforce.account': {
@@ -18,6 +19,7 @@ mappings = {
             'finserv__individualtype__c': 'Individual',
             'recordtypeid': '01236000000NPpsAAG'
         },
+        'numeric': set(),
         'unique': 'addepar_entity_id__c'
     },
     # 'salesforce.finserv__financialaccount__c': {
@@ -39,17 +41,34 @@ mappings = {
     #         'FinServ__Ownership__c': 'Individual',
     #         'recordtypeid': '01236000000NPpsAAG'
     #     },
+    #     'numeric': set(),
     #     'unique': 'addepar_entity_id__c'
     # },
     'salesforce.finserv__financialholding__c': {
         'name': 'FINANCIAL_HOLDINGS',
         'columns': {
+            'finserv__price__c': 'Price',
+            'name': 'Security',
+            'finserv__securities__r__addepar_entity_id__c': 'Security [Entity ID]',
+            'finserv__gainloss__c': 'Gain/Loss',
+            'finserv__shares__c': 'Quantity',
+            'finserv__marketvalue__c': 'Market Value',
+            'finserv__financialaccount__r__addepar_entity_id__c': 'Financial Account [Entity ID]',
+            'finserv__assetclass__c': 'Asset Class',
             'finserv__primaryowner__r__addepar_entity_id__c': 'Client [Entity ID]',
             'unfunded_commitments__c': 'Unfunded Commitments',
             'addepar_position_id__c': 'Position [Position ID]',
             'finserv__purchaseprice__c': 'Purchase Price'
         },
         'constants': {},
+        'numeric': set(
+            'finserv__price__c',
+            'finserv__gainloss__c',
+            'finserv__shares__c',
+            'finserv__marketvalue__c',
+            'unfunded_commitments__c',
+            'finserv__purchaseprice__c'
+        ),
         'unique': 'addepar_position_id__c'
     },
     # 'salesforce.finserv__securities__c': {
@@ -63,6 +82,7 @@ mappings = {
     #         'finserv__securitiesname__c': 'Security'
     #     },
     #     'constants': {},
+    #     'numeric': set(),
     #     'unique': 'addepar_entity_id__c'
     # }
 }
