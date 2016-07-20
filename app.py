@@ -17,7 +17,6 @@ dburl = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(dburl.path[1:], dburl.username,
                                                     dburl.password, dburl.hostname)
 conn = psycopg2.connect(db)
-cur = conn.cursor()
 auth = (os.environ['ADDEPAR_KEY'], os.environ['ADDEPAR_SECRET'])
 
 
@@ -42,15 +41,20 @@ def get_csv(view_id):
 
 
 def mark_unique():
+    cur = conn.cursor()
     for table in mappings.keys():
         unique_col = mappings[table]['unique']
         cur.execute('ALTER TABLE % ADD UNIQUE (%)', table, unique_col)
+
+    conn.commit()
+    cur.close()
 
 
 @app.route('/addepar')
 def addepar():
     response = ''
 
+    cur = conn.cursor()
     for table in mappings:
         config = mappings[table]
         name = config['name']
@@ -60,11 +64,18 @@ def addepar():
         csv = get_csv(view_id)
 
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
+        dbcols = insert_obj[0].keys()
+        percents = ','.join(['%s' for _ in range(len(dbcols))])
+        sql_string = "INSERT INTO %s ({}) VALUES ({})".format(percents, percents)
 
         for obj in insert_obj:
             obj.update(constants)
+            sql_data = list(dbcols) + [obj[col] for col in dbcols]
+            cur.execute(sql_string, sql_data)
+            response += cur.mogrify(sql_string, sql_data) + '<br>'
 
-        response += '{} {}<br>'.format(table, str(insert_obj))
+    conn.commit()
+    cur.close()
 
     return response
 
