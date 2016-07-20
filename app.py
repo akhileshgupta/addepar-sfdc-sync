@@ -7,6 +7,7 @@ import urlparse
 
 from flask import Flask
 from mappings import mappings
+from psycopg2.extensions import AsIs
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
@@ -70,7 +71,7 @@ def addepar():
 
         for obj in insert_obj:
             obj.update(constants)
-            sql_data = [table] + list(dbcols) + [obj[col] for col in dbcols]
+            sql_data = [AsIs(table)] + list(dbcols) + [obj[col] for col in dbcols]
             print(sql_string, sql_data)
             cur.execute(sql_string, sql_data)
             response += cur.mogrify(sql_string, sql_data) + '<br>'
