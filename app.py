@@ -65,8 +65,9 @@ def addepar():
         csv = get_csv(view_id)
 
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
-        dbcols = insert_obj[0].keys()
-        percents = ','.join(['%s' for _ in range(len(dbcols))])
+        dbcols = ','.join(insert_obj[0].keys())
+        percents = ','.join(['%s' for _ in range(len(insert_obj[0].keys()))])
+
         sql_string = "INSERT INTO {} ({}) VALUES ({}) ON CONFLICT ({}) DO UPDATE SET ({}) = ({})"\
                      .format(table, dbcols, percents, unique, dbcols, percents)
 
