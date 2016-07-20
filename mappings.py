@@ -22,28 +22,36 @@ mappings = {
         'numeric': frozenset(),
         'unique': 'addepar_entity_id__c'
     },
-    # 'salesforce.finserv__financialaccount__c': {
-    #     'name': 'FINANCIAL_ACCOUNTS',
-    #     'columns': {
-    #         'finserv__performanceqtd__c': 'Performance QTD',
-    #         'finserv__financialaccountnumber__c': 'Account Number',
-    #         'finserv__performancemtd__c': 'Performance MTD',
-    #         'finserv__balance__c': 'Balance',
-    #         'name': 'Financial Account',
-    #         'finserv__performance1yr__c': 'Performance 1Yr',
-    #         'finserv__performanceytd__c': 'Performance YTD',
-    #         'finserv__performance3yr__c': 'Performance 3Yr',
-    #         'addepar_entity_id__c': 'Financial Account [Entity ID]',
-    #         'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
-    #         'FinServ__ServiceProvider__c': 'Financial Service'
-    #     },
-    #     'constants': {
-    #         'FinServ__Ownership__c': 'Individual',
-    #         'recordtypeid': '01236000000NPpsAAG'
-    #     },
-    #     'numeric': frozenset(),
-    #     'unique': 'addepar_entity_id__c'
-    # },
+    'salesforce.finserv__financialaccount__c': {
+        'name': 'FINANCIAL_ACCOUNTS',
+        'columns': {
+            'finserv__performanceqtd__c': 'Performance QTD',
+            'finserv__financialaccountnumber__c': 'Account Number',
+            'finserv__performancemtd__c': 'Performance MTD',
+            'finserv__balance__c': 'Balance',
+            'name': 'Financial Account',
+            'finserv__performance1yr__c': 'Performance 1Yr',
+            'finserv__performanceytd__c': 'Performance YTD',
+            'finserv__performance3yr__c': 'Performance 3Yr',
+            'addepar_entity_id__c': 'Financial Account [Entity ID]',
+            'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
+            'FinServ__ServiceProvider__c': 'Financial Service'
+        },
+        'constants': {
+            'FinServ__Ownership__c': 'Individual',
+            'recordtypeid': '01236000000NPpsAAG'
+        },
+        'numeric': frozenset([
+            'finserv__performanceqtd__c',
+            'finserv__financialaccountnumber__c',
+            'finserv__performancemtd__c',
+            'finserv__balance__c',
+            'finserv__performance1yr__c',
+            'finserv__performanceytd__c',
+            'finserv__performance3yr__c',
+        ]),
+        'unique': 'addepar_entity_id__c'
+    },
     'salesforce.finserv__financialholding__c': {
         'name': 'FINANCIAL_HOLDINGS',
         'columns': {
@@ -71,18 +79,20 @@ mappings = {
         ]),
         'unique': 'addepar_position_id__c'
     },
-    # 'salesforce.finserv__securities__c': {
-    #     'name': 'SECURITIES',
-    #     'columns': {
-    #         'name': 'Ticker Symbol',
-    #         'finserv__cusip__c': 'CUSIP',
-    #         'addepar_entity_id__c': 'Security [Entity ID]',
-    #         'finserv__securityid__c': 'BBGID',
-    #         'finserv__price__c': 'Price',
-    #         'finserv__securitiesname__c': 'Security'
-    #     },
-    #     'constants': {},
-    #     'numeric': frozenset(),
-    #     'unique': 'addepar_entity_id__c'
-    # }
+    'salesforce.finserv__securities__c': {
+        'name': 'SECURITIES',
+        'columns': {
+            'name': 'Ticker Symbol',
+            'finserv__cusip__c': 'CUSIP',
+            'addepar_entity_id__c': 'Security [Entity ID]',
+            'finserv__securityid__c': 'BBGID',
+            'finserv__price__c': 'Price',
+            'finserv__securitiesname__c': 'Security'
+        },
+        'constants': {},
+        'numeric': frozenset([
+            'finserv__price__c'
+        ]),
+        'unique': 'addepar_entity_id__c'
+    }
 }
