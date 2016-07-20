@@ -93,6 +93,6 @@ mappings = {
         'numeric': frozenset([
             'finserv__price__c'
         ]),
-        'unique': ','.join(['addepar_entity_id__c', 'finserv__securitiesname__c'])
+        'unique': 'finserv__securitiesname__c'
     }
 }
