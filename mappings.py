@@ -20,27 +20,27 @@ mappings = {
         },
         'unique': 'addepar_entity_id__c'
     },
-    'salesforce.finserv__financialaccount__c': {
-        'name': 'FINANCIAL_ACCOUNTS',
-        'columns': {
-            'finserv__performanceqtd__c': 'Performance QTD',
-            'finserv__financialaccountnumber__c': 'Account Number',
-            'finserv__performancemtd__c': 'Performance MTD',
-            'finserv__balance__c': 'Balance',
-            'name': 'Financial Account',
-            'finserv__performance1yr__c': 'Performance 1Yr',
-            'finserv__performanceytd__c': 'Performance YTD',
-            'finserv__performance3yr__c': 'Performance 3Yr',
-            'addepar_entity_id__c': 'Financial Account [Entity ID]',
-            'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
-            'FinServ__ServiceProvider__c': 'Financial Service'
-        },
-        'constants': {
-            'FinServ__Ownership__c': 'Individual',
-            'recordtypeid': '01236000000NPpsAAG'
-        },
-        'unique': 'addepar_entity_id__c'
-    },
+    # 'salesforce.finserv__financialaccount__c': {
+    #     'name': 'FINANCIAL_ACCOUNTS',
+    #     'columns': {
+    #         'finserv__performanceqtd__c': 'Performance QTD',
+    #         'finserv__financialaccountnumber__c': 'Account Number',
+    #         'finserv__performancemtd__c': 'Performance MTD',
+    #         'finserv__balance__c': 'Balance',
+    #         'name': 'Financial Account',
+    #         'finserv__performance1yr__c': 'Performance 1Yr',
+    #         'finserv__performanceytd__c': 'Performance YTD',
+    #         'finserv__performance3yr__c': 'Performance 3Yr',
+    #         'addepar_entity_id__c': 'Financial Account [Entity ID]',
+    #         'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
+    #         'FinServ__ServiceProvider__c': 'Financial Service'
+    #     },
+    #     'constants': {
+    #         'FinServ__Ownership__c': 'Individual',
+    #         'recordtypeid': '01236000000NPpsAAG'
+    #     },
+    #     'unique': 'addepar_entity_id__c'
+    # },
     'salesforce.finserv__financialholding__c': {
         'name': 'FINANCIAL_HOLDINGS',
         'columns': {
