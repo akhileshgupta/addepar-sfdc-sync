@@ -28,9 +28,9 @@ mappings = {
             'finserv__performancemtd__c': 'Performance MTD',
             'finserv__balance__c': 'Balance',
             'name': 'Financial Account',
-            'finserv__performance1yr__c': 'Performance 1YR',
+            'finserv__performance1yr__c': 'Performance 1Yr',
             'finserv__performanceytd__c': 'Performance YTD',
-            'finserv__performance3yr__c': 'Performance 3YR',
+            'finserv__performance3yr__c': 'Performance 3Yr',
             'addepar_entity_id__c': 'Financial Account [Entity ID]',
             'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
             'FinServ__ServiceProvider__c': 'Financial Service'
