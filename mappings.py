@@ -11,7 +11,7 @@ mappings = {
     #     'columns': {},
     #     'constants': {}
     # },
-    'finserv__financialaccount__c': {
+    'salesforce.finserv__financialaccount__c': {
         'name': 'ACCOUNTS',
         'columns': {
             'name': 'Client',
