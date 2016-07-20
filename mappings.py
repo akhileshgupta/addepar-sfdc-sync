@@ -79,20 +79,20 @@ mappings = {
         ]),
         'unique': 'addepar_position_id__c'
     },
-    'salesforce.finserv__securities__c': {
-        'name': 'SECURITIES',
-        'columns': {
-            'name': 'Ticker Symbol',
-            'finserv__cusip__c': 'CUSIP',
-            'addepar_entity_id__c': 'Security [Entity ID]',
-            'finserv__securityid__c': 'BBGID',
-            'finserv__price__c': 'Price',
-            'finserv__securitiesname__c': 'Security'
-        },
-        'constants': {},
-        'numeric': frozenset([
-            'finserv__price__c'
-        ]),
-        'unique': 'finserv__securitiesname__c'
-    }
+    # 'salesforce.finserv__securities__c': {
+    #     'name': 'SECURITIES',
+    #     'columns': {
+    #         'name': 'Ticker Symbol',
+    #         'finserv__cusip__c': 'CUSIP',
+    #         'addepar_entity_id__c': 'Security [Entity ID]',
+    #         'finserv__securityid__c': 'BBGID',
+    #         'finserv__price__c': 'Price',
+    #         'finserv__securitiesname__c': 'Security'
+    #     },
+    #     'constants': {},
+    #     'numeric': frozenset([
+    #         'finserv__price__c'
+    #     ]),
+    #     'unique': 'finserv__securitiesname__c'
+    # }
 }
