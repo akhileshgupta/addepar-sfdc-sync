@@ -77,8 +77,10 @@ def addepar():
             sql_data = [handle_num(obj[col]) if col in numeric else obj[col] for col in dbcols]
             sql_data = sql_data + sql_data
 
+            statement = cur.mogrify(sql_string, sql_data)
+            print(statement)
             cur.execute(sql_string, sql_data)
-            response += cur.mogrify(sql_string, sql_data) + '<br>'
+            response += statement + '<br>'
 
     conn.commit()
     cur.close()
