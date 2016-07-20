@@ -71,7 +71,7 @@ def addepar():
 
         for obj in insert_obj:
             obj.update(constants)
-            sql_data = [AsIs(table)] + list(dbcols) + [obj[col] for col in dbcols]
+            sql_data = [AsIs(table)] + map(AsIs, dbcols) + [obj[col] for col in dbcols]
             print(sql_string, sql_data)
             cur.execute(sql_string, sql_data)
             response += cur.mogrify(sql_string, sql_data) + '<br>'
