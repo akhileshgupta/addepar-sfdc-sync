@@ -40,16 +40,6 @@ def get_csv(view_id):
     return csv.DictReader(data.text.splitlines())
 
 
-def mark_unique():
-    cur = conn.cursor()
-    for table in mappings.keys():
-        unique_col = mappings[table]['unique']
-        cur.execute('ALTER TABLE % ADD UNIQUE (%)', table, unique_col)
-
-    conn.commit()
-    cur.close()
-
-
 def gen_sql_string(table, dbcols, unique):
     percents = ','.join(['%s' for _ in range(len(dbcols))])
     dbcolstr = ','.join(dbcols)
