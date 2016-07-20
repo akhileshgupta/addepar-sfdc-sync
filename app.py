@@ -70,13 +70,15 @@ def addepar():
 
         sql_string = "INSERT INTO {} ({}) VALUES ({}) ON CONFLICT ({}) DO UPDATE SET ({}) = ({})"\
                      .format(table, dbcols, percents, unique, dbcols, percents)
+        print(sql_string)
 
         for obj in insert_obj:
             obj.update(constants)
+            print(obj)
             sql_data = [obj[col] for col in dbcols]
             sql_data = sql_data + sql_data
 
-            print(sql_string, sql_data)
+            print(sql_data)
             cur.execute(sql_string, sql_data)
             response += cur.mogrify(sql_string, sql_data) + '<br>'
 
