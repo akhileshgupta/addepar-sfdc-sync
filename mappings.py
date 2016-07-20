@@ -41,28 +41,28 @@ mappings = {
         },
         'unique': 'addepar_entity_id__c'
     },
-    # 'salesforce.finserv__financialholding__c': {
-    #     'name': 'FINANCIAL_HOLDINGS',
-    #     'columns': {
-    #         'finserv__primaryowner__r__addepar_entitiy_id__c': 'Client [Entity ID]',
-    #         'unfunded_commitments__c': 'Unfunded Commitments',
-    #         'addepar_position_id__c': 'Position [Position ID]',
-    #         'finserv__purchaseprice__c': 'Purchase Price'
-    #     },
-    #     'constants': {},
-    #     'unique': 'addepar_position_id__c'
-    # },
-    'salesforce.finserv__securities__c': {
-        'name': 'SECURITIES',
+    'salesforce.finserv__financialholding__c': {
+        'name': 'FINANCIAL_HOLDINGS',
         'columns': {
-            'name': 'Ticker Symbol',
-            'finserv__cusip__c': 'CUSIP',
-            'addepar_entity_id__c': 'Security [Entity ID]',
-            'finserv__securityid__c': 'BBGID',
-            'finserv__price__c': 'Price',
-            'finserv__securitiesname__c': 'Security'
+            'finserv__primaryowner__r__addepar_entitiy_id__c': 'Client [Entity ID]',
+            'unfunded_commitments__c': 'Unfunded Commitments',
+            'addepar_position_id__c': 'Position [Position ID]',
+            'finserv__purchaseprice__c': 'Purchase Price'
         },
         'constants': {},
-        'unique': 'addepar_entity_id__c'
-    }
+        'unique': 'addepar_position_id__c'
+    },
+    # 'salesforce.finserv__securities__c': {
+    #     'name': 'SECURITIES',
+    #     'columns': {
+    #         'name': 'Ticker Symbol',
+    #         'finserv__cusip__c': 'CUSIP',
+    #         'addepar_entity_id__c': 'Security [Entity ID]',
+    #         'finserv__securityid__c': 'BBGID',
+    #         'finserv__price__c': 'Price',
+    #         'finserv__securitiesname__c': 'Security'
+    #     },
+    #     'constants': {},
+    #     'unique': 'addepar_entity_id__c'
+    # }
 }
