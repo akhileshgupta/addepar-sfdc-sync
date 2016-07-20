@@ -73,7 +73,7 @@ def addepar():
         for obj in insert_obj:
             obj.update(constants)
             sql_data = map(AsIs, dbcols) + [obj[col] for col in dbcols]
-            sql_data = [AsIs(table)] + sql_data + config['unique'] + sql_data
+            sql_data = [AsIs(table)] + sql_data + [config['unique']] + sql_data
 
             print(sql_string, sql_data)
             cur.execute(sql_string, sql_data)
