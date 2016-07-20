@@ -19,7 +19,7 @@ mappings = {
             'finserv__individualtype__c': 'Individual',
             'recordtypeid': '01236000000NPpsAAG'
         },
-        'numeric': set(),
+        'numeric': frozenset(),
         'unique': 'addepar_entity_id__c'
     },
     # 'salesforce.finserv__financialaccount__c': {
@@ -41,7 +41,7 @@ mappings = {
     #         'FinServ__Ownership__c': 'Individual',
     #         'recordtypeid': '01236000000NPpsAAG'
     #     },
-    #     'numeric': set(),
+    #     'numeric': frozenset(),
     #     'unique': 'addepar_entity_id__c'
     # },
     'salesforce.finserv__financialholding__c': {
@@ -61,14 +61,14 @@ mappings = {
             'finserv__purchaseprice__c': 'Purchase Price'
         },
         'constants': {},
-        'numeric': set(
+        'numeric': frozenset([
             'finserv__price__c',
             'finserv__gainloss__c',
             'finserv__shares__c',
             'finserv__marketvalue__c',
             'unfunded_commitments__c',
             'finserv__purchaseprice__c'
-        ),
+        ]),
         'unique': 'addepar_position_id__c'
     },
     # 'salesforce.finserv__securities__c': {
@@ -82,7 +82,7 @@ mappings = {
     #         'finserv__securitiesname__c': 'Security'
     #     },
     #     'constants': {},
-    #     'numeric': set(),
+    #     'numeric': frozenset(),
     #     'unique': 'addepar_entity_id__c'
     # }
 }
