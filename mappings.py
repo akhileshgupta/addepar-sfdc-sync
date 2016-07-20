@@ -6,12 +6,12 @@ maps columns to constant values and a "unique" field which marks the column that
 the unique identifier.
 """
 mappings = {
-    # 'account': {
+    # 'salesforce.finserv__financialaccount__c': {
     #     'name': 'CLIENTS',
     #     'columns': {},
     #     'constants': {}
     # },
-    'salesforce.finserv__financialaccount__c': {
+    'salesforce.account': {
         'name': 'ACCOUNTS',
         'columns': {
             'name': 'Client',
