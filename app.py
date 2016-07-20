@@ -67,11 +67,14 @@ def addepar():
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
         dbcols = insert_obj[0].keys()
         percents = ','.join(['%s' for _ in range(len(dbcols))])
-        sql_string = "INSERT INTO %s ({}) VALUES ({})".format(percents, percents)
+        sql_string = "INSERT INTO %s ({}) VALUES ({}) ON CONFLICT DO UPDATE SET ({}) = ({})"\
+            .format(*([percents] * 4))
 
         for obj in insert_obj:
             obj.update(constants)
-            sql_data = [AsIs(table)] + map(AsIs, dbcols) + [obj[col] for col in dbcols]
+            sql_data = map(AsIs, dbcols) + [obj[col] for col in dbcols]
+            sql_data = [AsIs(table)] + sql_data + sql_data
+
             print(sql_string, sql_data)
             cur.execute(sql_string, sql_data)
             response += cur.mogrify(sql_string, sql_data) + '<br>'
