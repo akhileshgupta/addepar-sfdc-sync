@@ -7,7 +7,6 @@ import urlparse
 
 from flask import Flask
 from mappings import mappings
-from psycopg2.extensions import AsIs
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
@@ -61,19 +60,20 @@ def addepar():
         name = config['name']
         columns = config['columns']
         constants = config['constants']
+        unique = config['unique']
         view_id = app.config[name + '_VIEW']
         csv = get_csv(view_id)
 
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
         dbcols = insert_obj[0].keys()
         percents = ','.join(['%s' for _ in range(len(dbcols))])
-        sql_string = "INSERT INTO %s ({}) VALUES ({}) ON CONFLICT (%s) DO UPDATE SET ({}) = ({})"\
-            .format(*([percents] * 4))
+        sql_string = "INSERT INTO {} ({}) VALUES ({}) ON CONFLICT ({}) DO UPDATE SET ({}) = ({})"\
+                     .format(table, dbcols, percents, unique, dbcols, percents)
 
         for obj in insert_obj:
             obj.update(constants)
-            sql_data = map(AsIs, dbcols) + [obj[col] for col in dbcols]
-            sql_data = [AsIs(table)] + sql_data + [config['unique']] + sql_data
+            sql_data = [obj[col] for col in dbcols]
+            sql_data = sql_data + sql_data
 
             print(sql_string, sql_data)
             cur.execute(sql_string, sql_data)
