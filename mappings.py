@@ -37,7 +37,7 @@ mappings = [
             'finserv__performance3yr__c': 'Performance 3Yr',
             'addepar_entity_id__c': 'Financial Account [Entity ID]',
             'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
-            'FinServ__ServiceProvider__c': 'Financial Service'
+            'FinServ__ServiceProvider__c': 'Financial Service '
         },
         'constants': {
             'FinServ__Ownership__c': 'Individual',
