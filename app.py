@@ -41,7 +41,6 @@ def get_csv(view_id):
                         params=params)
 
     csvdata = data.text.splitlines()
-    print(csvdata[:2])
     return csv.DictReader(csvdata)
 
 
@@ -71,6 +70,7 @@ def format_data(obj, col, numeric):
 
 
 def work():
+    print('Beginning work')
     cur = conn.cursor()
     for schema in mappings:
         table = schema['table']
@@ -93,8 +93,6 @@ def work():
             sql_data = [format_data(obj, col, numeric) for col in dbcols]
             sql_data = sql_data + sql_data
 
-            statement = cur.mogrify(sql_string, sql_data)
-            print(statement)
             cur.execute(sql_string, sql_data)
 
     conn.commit()
