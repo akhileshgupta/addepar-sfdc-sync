@@ -3,18 +3,14 @@ import csv
 import os
 import psycopg2
 import requests
+# import schedule
 import six
-import threading
 import urlparse
 
-from flask import Flask
+from config import Config
 from mappings import mappings
 
-app = Flask(__name__)
-app.config.from_object('config.Config')
-app.config.update(dict(ADDEPAR_KEY=os.environ['ADDEPAR_KEY'],
-                       ADDEPAR_SECRET=os.environ['ADDEPAR_SECRET']))
-
+config = Config()
 dburl = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(dburl.path[1:], dburl.username,
                                                     dburl.password, dburl.hostname)
@@ -29,8 +25,8 @@ def today():
 
 def get_csv(view_id):
     """Query the V1 Portfolio API and return the results as a CSV DictReader."""
-    portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'], view_id)
-    firm_id = app.config['FIRM_ID']
+    portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(config['FIRM_URL'], view_id)
+    firm_id = config['FIRM_ID']
     date = today()
     params = {
         'portfolio_type': 'firm',
@@ -85,7 +81,7 @@ def work():
         numeric = config['numeric']
         unique = config['unique']
 
-        view_id = app.config[name + '_VIEW']
+        view_id = config[name + '_VIEW']
         csv = get_csv(view_id)
 
         insert_obj = [{key: row[col] for key, col in six.iteritems(columns)} for row in csv]
@@ -107,14 +103,6 @@ def work():
     print('Completed work!')
 
 
-@app.route('/addepar')
-def addepar():
-    """Kick off the work in a separate thread"""
-    t = threading.Thread(target=work)
-    t.start()
-    return 'Started work, check logs for details'
-
-"""Start the server"""
+"""Start the scheduled job"""
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    work()
