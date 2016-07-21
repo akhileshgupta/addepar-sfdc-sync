@@ -7,10 +7,9 @@ import requests
 import six
 import urlparse
 
-from config import Config
+from config import config
 from mappings import mappings
 
-config = Config()
 dburl = urlparse.urlparse(os.environ.get('DATABASE_URL'))
 db = 'dbname={} user={} password={} host={}'.format(dburl.path[1:], dburl.username,
                                                     dburl.password, dburl.hostname)
@@ -73,13 +72,13 @@ def format_data(obj, col, numeric):
 
 def work():
     cur = conn.cursor()
-    for config in mappings:
-        table = config['table']
-        name = config['name']
-        columns = config['columns']
-        constants = config['constants']
-        numeric = config['numeric']
-        unique = config['unique']
+    for schema in mappings:
+        table = schema['table']
+        name = schema['name']
+        columns = schema['columns']
+        constants = schema['constants']
+        numeric = schema['numeric']
+        unique = schema['unique']
 
         view_id = config[name + '_VIEW']
         csv = get_csv(view_id)
