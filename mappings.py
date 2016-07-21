@@ -87,7 +87,7 @@ mappings = {
             'addepar_entity_id__c': 'Security [Entity ID]',
             'finserv__securityid__c': 'BBGID',
             'finserv__price__c': 'Price',
-            'finserv__securitiesname__c': 'Security'
+            'finserv__securitiesname__c': 'Security [Entity ID]'
         },
         'constants': {},
         'numeric': frozenset([
