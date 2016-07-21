@@ -45,7 +45,9 @@ def get_csv(view_id):
                         headers={'Addepar-Firm': firm_id},
                         params=params)
 
-    return csv.DictReader(data.text.splitlines())
+    csvdata = data.text.splitlines()
+    print(csvdata[:2])
+    return csv.DictReader(csvdata)
 
 
 def gen_sql_string(table, dbcols, unique):
@@ -82,6 +84,7 @@ def work():
         constants = config['constants']
         numeric = config['numeric']
         unique = config['unique']
+
         view_id = app.config[name + '_VIEW']
         csv = get_csv(view_id)
 
