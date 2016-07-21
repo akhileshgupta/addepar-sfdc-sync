@@ -57,7 +57,7 @@ mappings = {
         'columns': {
             'finserv__price__c': 'Price',
             'name': 'Security',
-            'finserv__securities__r__finserv_securitiesname__c': 'Security [Entity ID]',
+            'finserv__securities__r__finserv__securitiesname__c': 'Security [Entity ID]',
             'finserv__gainloss__c': 'Gain/Loss',
             'finserv__shares__c': 'Quantity',
             'finserv__marketvalue__c': 'Market Value',
