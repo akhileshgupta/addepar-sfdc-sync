@@ -23,6 +23,7 @@ auth = (os.environ['ADDEPAR_KEY'], os.environ['ADDEPAR_SECRET'])
 
 
 def today():
+    """Return today's date (Pacific time zone) as YYYY-MM-DD"""
     return arrow.utcnow().to('US/Pacific').format('YYYY-MM-DD')
 
 
@@ -48,6 +49,7 @@ def get_csv(view_id):
 
 
 def gen_sql_string(table, dbcols, unique):
+    """Generates a Postgres UPSERT statement with the appropriate number of %s"""
     percents = ','.join(['%s' for _ in range(len(dbcols))])
     dbcolstr = ','.join(dbcols)
 
@@ -56,10 +58,12 @@ def gen_sql_string(table, dbcols, unique):
 
 
 def handle_num(value):
+    """Converts an empty string to None"""
     return value if value else None
 
 
 def format_data(obj, col, numeric):
+    """Format a column based on if its numeric or not. Also has a hack for custom CUSIP"""
     value = obj[col]
     if col in numeric:
         return handle_num(value)
@@ -102,10 +106,12 @@ def work():
 
 @app.route('/addepar')
 def addepar():
+    """Kick off the work in a separate thread"""
     t = threading.Thread(target=work)
     t.start()
     return 'Started work, check logs for details'
 
+"""Start the server"""
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
