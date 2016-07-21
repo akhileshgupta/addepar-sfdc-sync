@@ -53,6 +53,14 @@ def handle_num(value):
     return value if value else None
 
 
+def format_data(obj, col, numeric):
+    value = obj[col]
+    if value in numeric:
+        return handle_num(value)
+    elif col == 'finserv__cusip__c':
+        return None if len(value) > 9 else value
+
+
 def work():
     cur = conn.cursor()
     for table in mappings:
@@ -72,7 +80,7 @@ def work():
         for obj in insert_obj:
             obj.update(constants)
 
-            sql_data = [handle_num(obj[col]) if col in numeric else obj[col] for col in dbcols]
+            sql_data = [format_data(obj, col, numeric) for col in dbcols]
             sql_data = sql_data + sql_data
 
             statement = cur.mogrify(sql_string, sql_data)
