@@ -55,7 +55,7 @@ def handle_num(value):
 
 def format_data(obj, col, numeric):
     value = obj[col]
-    if value in numeric:
+    if col in numeric:
         return handle_num(value)
     elif col == 'finserv__cusip__c':
         return None if len(value) > 9 else value
