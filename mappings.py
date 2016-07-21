@@ -39,7 +39,7 @@ mappings = {
         },
         'constants': {
             'FinServ__Ownership__c': 'Individual',
-            'recordtypeid': '01236000000NPpsAAG'
+            'recordtypeid': '01236000000NPq4AAG'
         },
         'numeric': frozenset([
             'finserv__performanceqtd__c',
