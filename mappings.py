@@ -57,7 +57,7 @@ mappings = {
         'columns': {
             'finserv__price__c': 'Price',
             'name': 'Security',
-            'finserv__securities__r__addepar_entity_id__c': 'Security [Entity ID]',
+            'finserv__securities__r__finserv_securitiesname__c': 'Security [Entity ID]',
             'finserv__gainloss__c': 'Gain/Loss',
             'finserv__shares__c': 'Quantity',
             'finserv__marketvalue__c': 'Market Value',
@@ -84,7 +84,6 @@ mappings = {
         'columns': {
             'name': 'Ticker Symbol',
             'finserv__cusip__c': 'CUSIP',
-            'addepar_entity_id__c': 'Security [Entity ID]',
             'finserv__securityid__c': 'BBGID',
             'finserv__price__c': 'Price',
             'finserv__securitiesname__c': 'Security [Entity ID]'
