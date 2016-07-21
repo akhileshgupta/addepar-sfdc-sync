@@ -8,8 +8,9 @@ marks the column that is the unique identifier.
 ALERT: BE VERY CAREFUL WHEN EDITING THIS OBJECT. TABLE AND COLUMN NAMES ARE INJECTED INTO SQL
 STATEMENTS DIRECTLY. YOU COULD ACCIDENTALLY CREATE A SQL INJECTION!
 """
-mappings = {
-    'salesforce.account': {
+mappings = [
+    {
+        'table': 'salesforce.account',
         'name': 'ACCOUNTS',
         'columns': {
             'name': 'Client',
@@ -22,7 +23,8 @@ mappings = {
         'numeric': frozenset(),
         'unique': 'addepar_entity_id__c'
     },
-    'salesforce.finserv__financialaccount__c': {
+    {
+        'table': 'salesforce.finserv__financialaccount__c',
         'name': 'FINANCIAL_ACCOUNTS',
         'columns': {
             'finserv__performanceqtd__c': 'Performance QTD',
@@ -52,7 +54,8 @@ mappings = {
         ]),
         'unique': 'addepar_entity_id__c'
     },
-    'salesforce.finserv__securities__c': {
+    {
+        'table': 'salesforce.finserv__securities__c',
         'name': 'SECURITIES',
         'columns': {
             'name': 'Ticker Symbol',
@@ -67,7 +70,8 @@ mappings = {
         ]),
         'unique': 'finserv__securitiesname__c'
     },
-    'salesforce.finserv__financialholding__c': {
+    {
+        'table': 'salesforce.finserv__financialholding__c',
         'name': 'FINANCIAL_HOLDINGS',
         'columns': {
             'finserv__price__c': 'Price',
@@ -94,4 +98,4 @@ mappings = {
         ]),
         'unique': 'addepar_position_id__c'
     }
-}
+]

@@ -65,8 +65,8 @@ def format_data(obj, col, numeric):
 
 def work():
     cur = conn.cursor()
-    for table in mappings:
-        config = mappings[table]
+    for config in mappings:
+        table = config['table']
         name = config['name']
         columns = config['columns']
         constants = config['constants']
