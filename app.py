@@ -1,3 +1,4 @@
+import arrow
 import csv
 import os
 import psycopg2
@@ -21,16 +22,21 @@ conn = psycopg2.connect(db)
 auth = (os.environ['ADDEPAR_KEY'], os.environ['ADDEPAR_SECRET'])
 
 
+def today():
+    return arrow.utcnow().to('US/Pacific').format('YYYY-MM-DD')
+
+
 def get_csv(view_id):
     """Query the V1 Portfolio API and return the results as a CSV DictReader."""
     portfolio_url = '{}/api/v1/portfolio/views/{}/results'.format(app.config['FIRM_URL'], view_id)
     firm_id = app.config['FIRM_ID']
+    date = today()
     params = {
         'portfolio_type': 'firm',
         'portfolio_id': firm_id,
         'output_type': 'csv',
-        'start_date': '2016-06-01',
-        'end_date': '2016-06-01'
+        'start_date': date,
+        'end_date': date
     }
 
     data = requests.get(portfolio_url,
