@@ -3,7 +3,7 @@ import csv
 import os
 import psycopg2
 import requests
-# import schedule
+import schedule
 import six
 import urlparse
 
@@ -102,4 +102,4 @@ def work():
 
 """Start the scheduled job"""
 if __name__ == '__main__':
-    work()
+    schedule.every().hour.do(work)
