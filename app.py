@@ -40,7 +40,7 @@ def get_csv(view_id):
                         headers={'Addepar-Firm': firm_id},
                         params=params)
 
-    csvdata = data.text.splitlines()
+    csvdata = data.text[3:].splitlines()
     return csv.DictReader(csvdata)
 
 
