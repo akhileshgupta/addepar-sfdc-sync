@@ -5,6 +5,7 @@ import psycopg2
 import requests
 import schedule
 import six
+import time
 import urlparse
 
 from config import config
@@ -103,3 +104,7 @@ def work():
 """Start the scheduled job"""
 if __name__ == '__main__':
     schedule.every().hour.do(work)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
