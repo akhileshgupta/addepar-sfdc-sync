@@ -108,7 +108,7 @@ if __name__ == '__main__':
     # port = int(os.environ.get('PORT', 5000))
     # app.run(host='0.0.0.0', port=port)
 
-    schedule.every().hour.do(work)
+    schedule.every(2).minutes.do(work)
 
     first = True
     while True:
@@ -116,4 +116,4 @@ if __name__ == '__main__':
             print('Entered while loop')
         first = False
         schedule.run_pending()
-        time.sleep(60)
+        time.sleep(5)
