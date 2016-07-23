@@ -110,6 +110,10 @@ if __name__ == '__main__':
 
     schedule.every().hour.do(work)
 
+    first = True
     while True:
+        if first:
+            print('Entered while loop')
+        first = False
         schedule.run_pending()
         time.sleep(60)
