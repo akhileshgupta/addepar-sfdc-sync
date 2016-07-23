@@ -8,6 +8,7 @@ import six
 import time
 import urlparse
 
+from flask import Flask
 from config import config
 from mappings import mappings
 
@@ -103,6 +104,8 @@ def work():
 
 """Start the scheduled job"""
 if __name__ == '__main__':
+    app = Flask(__name__)
+    app.run()
     schedule.every().hour.do(work)
 
     while True:
