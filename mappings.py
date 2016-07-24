@@ -14,14 +14,14 @@ mappings = [
         'name': 'ACCOUNTS',
         'columns': {
             'name': 'Client',
-            'addepar_entity_id__c': 'Client [Entity ID]'
+            'addepar__entity_id__c': 'Client [Entity ID]'
         },
         'constants': {
             'finserv__individualtype__c': 'Individual',
-            'recordtypeid': '01236000000NPpsAAG'
+            'recordtypeid': '012500000006LGZAA2'
         },
         'numeric': frozenset(),
-        'unique': 'addepar_entity_id__c'
+        'unique': 'addepar__entity_id__c'
     },
     {
         'table': 'salesforce.finserv__financialaccount__c',
@@ -35,13 +35,13 @@ mappings = [
             'finserv__performance1yr__c': 'Performance 1Yr',
             'finserv__performanceytd__c': 'Performance YTD',
             'finserv__performance3yr__c': 'Performance 3Yr',
-            'addepar_entity_id__c': 'Financial Account [Entity ID]',
-            'FinServ__PrimaryOwner__r__Addepar_Entity_ID__c': 'Client [Entity ID]',
-            'FinServ__ServiceProvider__c': 'Financial Service'
+            'addepar__entity_id__c': 'Financial Account [Entity ID]',
+            'finserv__primaryowner__r__addepar__entity_id__c': 'Client [Entity ID]',
+            'finserv__serviceprovider__c': 'Financial Service'
         },
         'constants': {
-            'FinServ__Ownership__c': 'Individual',
-            'recordtypeid': '01236000000NPq4AAG'
+            'finserv__ownership__c': 'Individual',
+            'recordtypeid': '012500000006LGlAAM'
         },
         'numeric': frozenset([
             'finserv__performanceqtd__c',
@@ -52,7 +52,7 @@ mappings = [
             'finserv__performanceytd__c',
             'finserv__performance3yr__c',
         ]),
-        'unique': 'addepar_entity_id__c'
+        'unique': 'addepar__entity_id__c'
     },
     {
         'table': 'salesforce.finserv__securities__c',
@@ -80,11 +80,11 @@ mappings = [
             'finserv__gainloss__c': 'Gain/Loss',
             'finserv__shares__c': 'Quantity',
             'finserv__marketvalue__c': 'Market Value',
-            'finserv__financialaccount__r__addepar_entity_id__c': 'Financial Account [Entity ID]',
+            'finserv__financialaccount__r__addepar__entity_id__c': 'Financial Account [Entity ID]',
             'finserv__assetclass__c': 'Asset Class',
-            'finserv__primaryowner__r__addepar_entity_id__c': 'Client [Entity ID]',
-            'unfunded_commitments__c': 'Unfunded Commitments',
-            'addepar_position_id__c': 'Position [Position ID]',
+            'finserv__primaryowner__r__addepar__entity_id__c': 'Client [Entity ID]',
+            'addepar__unfunded_commitments__c': 'Unfunded Commitments',
+            'addepar__position_id__c': 'Position [Position ID]',
             'finserv__purchaseprice__c': 'Purchase Price'
         },
         'constants': {},
@@ -93,9 +93,9 @@ mappings = [
             'finserv__gainloss__c',
             'finserv__shares__c',
             'finserv__marketvalue__c',
-            'unfunded_commitments__c',
+            'addepar__unfunded_commitments__c',
             'finserv__purchaseprice__c'
         ]),
-        'unique': 'addepar_position_id__c'
+        'unique': 'addepar__position_id__c'
     }
 ]
