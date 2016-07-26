@@ -8,7 +8,7 @@ import six
 import time
 import urlparse
 
-from flask import Flask
+# from flask import Flask
 from config import config
 from mappings import mappings
 
@@ -102,6 +102,19 @@ def work():
     print('Completed work!')
 
 
+def drop_trigger_log():
+    print('Dropping trigger log')
+    cur = conn.cursor()
+    for table in config.TRIGGER_TABLES:
+        sql_string = "TRUNCATE TABLE {}".format(table)
+
+        cur.execute(sql_string)
+
+    conn.commit()
+    cur.close()
+    print('Completed dropping triggers')
+
+
 """Start the scheduled job"""
 if __name__ == '__main__':
     # app = Flask(__name__)
@@ -109,6 +122,7 @@ if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=port)
 
     schedule.every().hour.do(work)
+    schedule.every().dat.at('12:30').do(drop_trigger_log)
 
     first = True
     while True:

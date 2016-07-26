@@ -4,5 +4,6 @@ config = {
     'ACCOUNTS_VIEW': 228,
     'FINANCIAL_ACCOUNTS_VIEW': 229,
     'FINANCIAL_HOLDINGS_VIEW': 230,
-    'SECURITIES_VIEW': 231
+    'SECURITIES_VIEW': 231,
+    'TRIGGER_TABLES': ['salesforce._trigger_log', 'salesforce._trigger_log_archive']
 }
