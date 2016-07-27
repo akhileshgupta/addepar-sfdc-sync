@@ -105,7 +105,7 @@ def work():
 def drop_trigger_log():
     print('Dropping trigger log')
     cur = conn.cursor()
-    for table in config.TRIGGER_TABLES:
+    for table in config['TRIGGER_TABLES']:
         sql_string = "TRUNCATE TABLE {}".format(table)
 
         cur.execute(sql_string)
