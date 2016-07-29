@@ -122,7 +122,7 @@ if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=port)
 
     schedule.every().hour.do(work)
-    schedule.every(6).hour.do(drop_trigger_log)
+    # schedule.every(6).hour.do(drop_trigger_log)
 
     first = True
     while True:
