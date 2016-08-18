@@ -77,7 +77,7 @@ mappings = [
             'finserv__price__c': 'Price',
             'name': 'Security',
             'finserv__securities__r__finserv__securitiesname__c': 'Security [Entity ID]',
-            'finserv__gainloss__c': 'Gain/Loss',
+            'finserv__gainloss__c': 'Gain (Loss)',
             'finserv__shares__c': 'Quantity',
             'finserv__marketvalue__c': 'Market Value',
             'finserv__financialaccount__r__addepar__entity_id__c': 'Financial Account [Entity ID]',
